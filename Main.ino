@@ -24,8 +24,9 @@ int t; // Stores temp erature value
 
 void setup()
 {
-    Serial.begin(9600);
-    pinMode(9, OUTPUT);
+    Serial.begin(9600); 
+    pinMode(9, OUTPUT); // pin setup for the water pump
+    pinMode(8, OUTPUT); // pin setup for the fan
     Serial.println("Temperature and Humidity Sensor Test");
     lcd.init(); //initialize the lcd
     lcd.backlight(); //open the backlight
@@ -80,4 +81,12 @@ void loop()
     lcd.print("%");
     
   delay(1000); //Delay 1 sec.
+
+// If the temperature data collected by the dht11 is more than 33 degree celsius, the fan will be turned on.
+
+  if (t > 33) {
+    digitalWrite(8, HIGH);
+  } else {
+    digitalWrite(8, LOW);
+  }
 }
