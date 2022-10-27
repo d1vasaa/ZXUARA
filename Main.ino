@@ -1,4 +1,4 @@
- // This code was made by Team ZXUARA. Please do not copy our code.
+ // This code was made by Team ZXUARA.
  //  I2C LCD1602
  //  SDA --> A4
  //  SCL --> A5
@@ -54,10 +54,10 @@ void loop()
     // When the data is more than 800 it determines that the detection input is dry. 
     // If sensor data is more than 800, d9 turns on. Else, d9 turns off.
         
-    if (sensorValue>800) {
-      digitalWrite(9, HIGH); 
-    } else {
+    if (sensorValue<900) {
       digitalWrite(9, LOW); 
+    } else {
+      digitalWrite(9,HIGH); 
     }
     delay(1000); // Delay 1 second.
         
@@ -84,7 +84,7 @@ void loop()
 
 // If the temperature data collected by the dht11 is more than 33 degree celsius, the fan will be turned on.
 
-  if (t > 33) {
+  if (t > 36) {
     digitalWrite(8, HIGH);
   } else {
     digitalWrite(8, LOW);
