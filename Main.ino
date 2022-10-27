@@ -1,4 +1,4 @@
- // This code was made by Team ZXUARA.
+ // This code was made by Team ZXUARA. Please do not copy our code, tq.
  //  I2C LCD1602
  //  SDA --> A4
  //  SCL --> A5
