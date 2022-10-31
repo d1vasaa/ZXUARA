@@ -84,7 +84,7 @@ void loop()
 
 // If the temperature data collected by the dht11 is more than 33 degree celsius, the fan will be turned on.
 
-  if (t > 36) {
+  if (t > 31) {
     digitalWrite(8, HIGH);
   } else {
     digitalWrite(8, LOW);
