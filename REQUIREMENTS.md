@@ -9,6 +9,6 @@
 ## [DHT11 (1x)](https://shopee.com.my/DHT11-DHT-11-High-Accuracy-Temperature-and-Humidity-Moisture-Sensor-Detect-3.3V-5V-Module-**FREE-CABLE-TechMakers-i.55645224.1843949397?sp)
 ## [Soil Moisture Sensor (1x)](https://shopee.com.my/Adjustable-Soil-Moisture-Sensor-Soil-Hygrometer-Sensor-for-Arduino-i.33287405.808599522?sp_atk=c20fbbc8-1d28-4099-9cfd-cd87232a0214&xptdk=)
 ## [I2C 16x2 LCD (1x)](https://shopee.com.my/Arduino-Serial-IIC-I2C-LCD-1602-(16x2)-Yellow-Liquid-Crystal-Display-Module-i.55645224.11716371254?sp_atk=57a69cb0-eb66-46d5-a3b4-19291907)
-## [Pi-FAN (1x)](https://shopee.com.my/DC-5V-0.20A-Cooling-Fan-For-Raspberry-Pi-3-4-Model-3B-3B-4B-i.33287405.2840367600?sp_atk=5b51b6b0-3268-4a6f-8d12-d80987c84c95&xptdk=5b51)
+## [Cooling Fan (1x)]([https://shopee.com.my/DC-5V-0.20A-Cooling-Fan-For-Raspberry-Pi-3-4-Model-3B-3B-4B-i.33287405.2840367600?sp_atk=5b51b6b0-3268-4a6f-8d12-d80987c84c95&xptdk=5b51](https://shopee.com.my/ATSSB-Funtech-Ventilation-Fan-For-Server-Rack-Mount-12CM-16CM-2-Wires-Axial-Cooling-Fan-Metal-AC-220V-240V-UK-3-Pin-i.310339121.7953716174?sp_atk=4230cd76-3cef-48e0-955d-de86b089db37&xptdk=4230cd76-3cef-48e0-955d-de86b089db37)
 ## [Male To Male Jump Cables (alot)](https://shopee.com.my/Male-to-Male-(MM)-40pcs-Dupont-Jumper-Wire-DIY-Experiment-Breadboard-Rainbow-40p-Wires-Cable-10cm-20cm-30cm-for-Arduino-i.33091591.524229147?sp_at)
 ## [Female To Male Jump Cables (alot)](https://shopee.com.my/Female-to-Male-(FM)-40pcs-Dupont-Jumper-Wire-DIY-Experiment-Breadboard-Rainbow-Cable-40p-10cm-20cm-30cm-for-Arduino-i.33091591.460621073)
