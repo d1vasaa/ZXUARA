@@ -1,92 +1,103 @@
  // This code was made by Team ZXUARA. Please do not copy our code, thank you.
- //  I2C LCD1602
- //  SDA --> A4
- //  SCL --> A5
-
-//Libraries
-#include <dht.h> 
-//I2C LCD:
+ // libraries //
+#include <dht.h>
 #include <LiquidCrystal_I2C.h>
 #include <Wire.h>
+// libraries //
 
-LiquidCrystal_I2C lcd(0x27,16,2); // set the LCD address to 0x27 for a 16 chars and 2 line display
-  
-//Constants
+// variables //
 #define dht_apin A0 // Analog Pin sensor is connected to
 dht DHT;
-int sensorPin = A1;
+int SoilSensor = A1; 
 int sensorValue;  
+int h;
+int t;
+bool condition;
+char iv = 0;
+// variables //
 
-//Variables
-//int chk;
-int h;  // Stores humidity value
-int t; // Stores temp erature value
-
-void setup()
-{
-    Serial.begin(9600); 
-    pinMode(9, OUTPUT); // pin setup for the water pump
-    pinMode(8, OUTPUT); // pin setup for the fan
-    Serial.println("Temperature and Humidity Sensor Test");
-    lcd.init(); //initialize the lcd
-    lcd.backlight(); //open the backlight
+// setup //
+LiquidCrystal_I2C lcd(0x27,16,2);
+void setup() {
+  Serial.begin(9600); 
+  pinMode(9, OUTPUT); // Pin setup for the water pump.
+  pinMode(8, OUTPUT); // Pin setup for the fan.
+  pinMode(SoilSensor, INPUT);
+  lcd.init(); //initialize the lcd
+  lcd.backlight(); //open the backlight
+  //  SDA --> A4
+  //  SCL --> A5
 }
+// setup //
 
-void loop()
-{
-    // Read's sensor data and prints it our in serial monitor
-    sensorValue = analogRead(sensorPin); 
+// the logic //
+void loop() {
+  // the code for the soil moisture sensor, mobile app and water pump ig //
+  condition = true;
+  iv = Serial.read();
+  Serial.println(iv);
+  if (iv == '0') {
+    while(condition==true) {
+      digitalWrite(9, HIGH);
+      Serial.println("on");
+      char avn = Serial.read();
+      Serial.println(avn);
+      if (avn == '1') {
+        condition = false;
+      }
+    }
+  } else {
+    digitalWrite(9, LOW);
+    Serial.println("off");
+    sensorValue = analogRead(SoilSensor); 
     Serial.println("Analog Value : ");
     Serial.println(sensorValue);
-    // Read data and store it to variables h (humidity) and t (temperature)
-    // Reading temperature or humidity takes about 250 milliseconds!
-    DHT.read11(dht_apin);
-    h = DHT.humidity;
-    t = DHT.temperature;
-    
-    // Print temp and humidity values to serial monitor
-    Serial.print("Humidity: ");
-    Serial.print(h);
-    Serial.print(" %, Temp: ");
-    Serial.print(t);
-    Serial.println(" ° Celsius");
-
-    // When the data is more than 800 it determines that the detection input is dry. 
-    // If sensor data is more than 800, d9 turns on. Else, d9 turns off.
-        
-    if (sensorValue<900) {
-      digitalWrite(9, LOW); 
+    if (sensorValue>900) {
+      digitalWrite(9, HIGH); 
     } else {
-      digitalWrite(9,HIGH); 
+      digitalWrite(9, LOW);
     }
-    delay(1000); // Delay 1 second.
-        
-// set the cursor to (0,0):
-// print from 0 to 9:
+    iv = Serial.read(); 
+    Serial.println(iv);
+  }
+  // the code for the soil moisture sensor, mobile app and water pump ig //
+  
+  // the code for the I2C LCD 16x2 //
+  DHT.read11(dht_apin);
+  h = DHT.humidity;
+  t = DHT.temperature;
 
-    lcd.setCursor(0, 0);
-    lcd.println(" Now Temperature ");
+  Serial.print("Humidity: ");
+  Serial.print(h);
+  Serial.print(" %, Temp: ");
+  Serial.print(t);
+  Serial.println(" ° Celsius");
+
+  lcd.setCursor(0, 0);
+  lcd.println(" Now Temperature ");
     
-    lcd.setCursor(0, 1);
-    lcd.print("T:");
-    lcd.print(t);
-    lcd.print("C");
+  lcd.setCursor(0, 1);
+  lcd.print("T:");
+  lcd.print(t);
+  lcd.print("C");
 
-    lcd.setCursor(6, 1);
-    lcd.println("2022 ");
+  lcd.setCursor(6, 1);
+  lcd.println("2022 ");
      
-    lcd.setCursor(11, 1);
-    lcd.print("H:");
-    lcd.print(h);
-    lcd.print("%");
-    
-  delay(1000); //Delay 1 sec.
+  lcd.setCursor(11, 1);
+  lcd.print("H:");
+  lcd.print(h);
+  lcd.print("%");
 
-// If the temperature data collected by the dht11 is more than 33 degree celsius, the fan will be turned on.
+  delay(1000);
+  // the code for the I2C LCD 16x2 //
 
+  // the code for the fan ig //
   if (t > 31) {
     digitalWrite(8, HIGH);
   } else {
     digitalWrite(8, LOW);
   }
+  // the code for the fan ig //
 }
+// the logic // 
