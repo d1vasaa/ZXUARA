@@ -1,5 +1,5 @@
- // This code was made by Team ZXUARA. Please do not copy our code, thank you.
- // libraries //
+ // This code was made by Team ZXUARA. Please do not copy our code, thank you. //
+// libraries //
 #include <dht.h>
 #include <LiquidCrystal_I2C.h>
 #include <Wire.h>
@@ -12,14 +12,17 @@ int SoilSensor = A1;
 int sensorValue;  
 int h;
 int t;
-bool condition;
-char iv = 0;
+bool autoOn;
+bool autoOff;
+char iv;
+char iv2;
+int c = 29;
 // variables //
 
 // setup //
 LiquidCrystal_I2C lcd(0x27,16,2);
 void setup() {
-  Serial.begin(9600); 
+  Serial.begin(9600);   
   pinMode(9, OUTPUT); // Pin setup for the water pump.
   pinMode(8, OUTPUT); // Pin setup for the fan.
   pinMode(SoilSensor, INPUT);
@@ -33,32 +36,41 @@ void setup() {
 // the logic //
 void loop() {
   // the code for the soil moisture sensor, mobile app and water pump ig //
-  condition = true;
+  autoOff = false;
+  autoOn = true;
   iv = Serial.read();
-  Serial.println(iv);
   if (iv == '0') {
-    while(condition==true) {
+    autoOff = true;
+    autoOn = false;
+  }
+  else if (iv == '1') {
+    autoOff = false;
+    autoOn = true;
+  }
+  else if (iv == '2') {
+    c = 29;
+  }
+  else if (iv == '3') {
+    c = 30;
+  }
+  else if (iv == '4') {
+    c = 31;
+  }
+  else {
+  }
+  
+  if (autoOff == true && autoOn == false){
       digitalWrite(9, HIGH);
-      Serial.println("on");
-      char avn = Serial.read();
-      Serial.println(avn);
-      if (avn == '1') {
-        condition = false;
       }
-    }
-  } else {
+  else if (autoOn == true && autoOff == false) {
     digitalWrite(9, LOW);
-    Serial.println("off");
-    sensorValue = analogRead(SoilSensor); 
-    Serial.println("Analog Value : ");
-    Serial.println(sensorValue);
+    sensorValue = analogRead(SoilSensor);
     if (sensorValue>900) {
       digitalWrite(9, HIGH); 
     } else {
       digitalWrite(9, LOW);
     }
-    iv = Serial.read(); 
-    Serial.println(iv);
+    
   }
   // the code for the soil moisture sensor, mobile app and water pump ig //
   
@@ -66,12 +78,14 @@ void loop() {
   DHT.read11(dht_apin);
   h = DHT.humidity;
   t = DHT.temperature;
-
+  
   Serial.print("Humidity: ");
   Serial.print(h);
-  Serial.print(" %, Temp: ");
+  Serial.print("%");
+  Serial.print("|");
+  Serial.print("Temperature: ");
   Serial.print(t);
-  Serial.println(" ° Celsius");
+  Serial.println("° C");
 
   lcd.setCursor(0, 0);
   lcd.println(" Now Temperature ");
@@ -93,7 +107,7 @@ void loop() {
   // the code for the I2C LCD 16x2 //
 
   // the code for the fan ig //
-  if (t > 31) {
+  if (t > c) {
     digitalWrite(8, HIGH);
   } else {
     digitalWrite(8, LOW);
