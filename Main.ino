@@ -96,7 +96,7 @@ void loop() {
   lcd.print("C");
 
   lcd.setCursor(6, 1);
-  lcd.println("2022 ");
+  lcd.println("2023 ");
      
   lcd.setCursor(11, 1);
   lcd.print("H:");
